@@ -70,8 +70,9 @@ You are tasked with designing a real-time surge pricing system for a rapidly gro
 
 # Principles that I've learnt
 - System design is all about making trade-offs all the time.
-- Over-the-network is really, really expensive. So perform in-memory processing while you still can.
+- Over-the-network operations is really, really expensive. So perform in-memory processing while you still can.
 - It's all about batch processing. Always insert data in batches.
+- If my code runs 1ms slower for each operation. It would make the system run 10 seconds slower for 10,000 ops.
 
 
 # Technology
