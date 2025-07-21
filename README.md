@@ -39,9 +39,9 @@ You are tasked with designing a real-time surge pricing system for a rapidly gro
 # My Proposed Solution
 - Go Services (Producer): A high-performance, concurrent set of microservices written in Golang responsible for:
 
-    Receiving driver heartbeats (longitude, latitude) via an HTTP API.
+    Receiving real-time driver heartbeats (longitude, latitude, availability status) via an HTTP API.
   
-    Receiving customer's requests for ride (pickup coordiation, dropoff coordination, vehicle type) via an HTTP API.
+    Receiving customer's request for ride (pickup coordiation, dropoff coordination, vehicle type) via an HTTP API.
 
     Performing in-memory point-in-polygon checks against pre-loaded geographic zones to determine each driver's current zone.
 
