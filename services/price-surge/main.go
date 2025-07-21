@@ -1,30 +1,38 @@
 package main
 
 import (
-	"database/sql"
 	"log"
 	"sync"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	// Load .env
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	// Kafka Config
 	kafkaBroker := "localhost:9092"
 	kafkaHeartbeatTopic := "driver-heartbeats"
 	kafkaRideRequestsTopic := "ride-requests"
 	kafkaGroupID := "heartbound-group"
 
-	// Init db conn
-	db, err := sql.Open("postgres", "port=5432 user=postgres password=postgres dbname=grid_db sslmode=disable")
+	// Init DB Conn
+	db, err := GetDbConn()
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 
-	// Initialize global sync.Map to store heartbeats
+	// Init global sync.Map to store heartbeats
 	var driversInfo sync.Map
 
-	// Initialize global sync.Map to store ride requests
+	// Init global sync.Map to store ride requests
 	var rideRequestsToProcess sync.Map
 
-	// Initialize 2 global sync.Map to store supply, demand of each zone
+	// Init global sync.Map to store ride supply & demand of each zone
 	var zoneDriverCount sync.Map
 	var zoneRideRequests sync.Map
 
